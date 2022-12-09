@@ -26,19 +26,31 @@ public class LectureController implements ILectureController {
 
     @GetMapping
     public ResponseEntity<Lecture> createLecture(@RequestBody Lecture lecture) throws BadRequestException{
-        return ResponseEntity.created(URI.create("/lecture/"+lecture.getLectureName())).build();
+        if (lecture == null){
+            return (ResponseEntity<Lecture>) ResponseEntity.badRequest();
+        }else {
+            return ResponseEntity.created(URI.create("/lecture/" + lecture.getLectureName())).build();
+        }
     }
 
     @GetMapping
     public ResponseEntity<Lecture> updateLecture(@RequestBody Lecture lecture) throws BadRequestException{
         logger.debug("Request to save Lecture {}", lecture);
-        return ResponseEntity.ok(lectureService.save(lecture));
+        if (lecture == null){
+            return (ResponseEntity<Lecture>) ResponseEntity.badRequest();
+        }else {
+            return ResponseEntity.ok(lectureService.save(lecture));
+        }
     }
 
     @GetMapping
     public ResponseEntity<Lecture> updateLecture(@PathVariable(value = "id") Long id, @Valid @RequestBody Lecture lectureDetails) throws ResourceNotFoundException{
         logger.debug("Request to save Lecture {}", lectureDetails);
-        return ResponseEntity.ok(lectureService.save(lectureDetails));
+        if (id == null){
+            return (ResponseEntity<Lecture>) ResponseEntity.notFound();
+        }else {
+            return ResponseEntity.ok(lectureService.save(lectureDetails));
+        }
     }
 
     @GetMapping
@@ -50,12 +62,16 @@ public class LectureController implements ILectureController {
     @GetMapping
     public ResponseEntity<Optional<Lecture>> getLecture(@PathVariable Long id) throws ResourceNotFoundException{
         logger.debug("Request to find Lecture {}", id);
-        return ResponseEntity.ok(lectureService.findOne(id));
+        if (id == null){
+            return (ResponseEntity<Optional<Lecture>>) ResponseEntity.notFound();
+        }else {
+            return ResponseEntity.ok(lectureService.findOne(id));
+        }
     }
 
     @GetMapping
     public ResponseEntity<Void> deleteLecture(@PathVariable Long id){
         logger.debug("Request to delete Lecture {}", id);
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        return (ResponseEntity<Void>) ResponseEntity.noContent();
     }
 }

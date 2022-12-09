@@ -15,13 +15,12 @@ public interface ILectureController {
      * {@code POST  /lectures} : Methode erstellt eine Ressource vom Typ Lecture.
      *
      * @param lecture Instanz von Lecture, die am Server erstellt werden soll.
-     * Parameter lecture ist nicht zulässig, falls er bereits eine Id hat, die nicht null ist.
+     *                Parameter lecture ist nicht zulässig, falls er bereits eine Id hat, die nicht null ist.
      * @return Eine {@link ResponseEntity} mit Status Code {@code 200 (OK)} und im Body die erstellte Ressource.
      * @throws BadRequestException falls lecture nicht zulässig ist.
-     *
      */
     @PostMapping
-    ResponseEntity<Lecture> createLecture(@RequestBody Lecture lecture) throws BadRequestException;
+    Object createLecture(@RequestBody Lecture lecture) throws BadRequestException;
 
     /**
      * {@code PUT  /lectures} : aktualisiert eine existierende Ressource vom Typ Lecture.
