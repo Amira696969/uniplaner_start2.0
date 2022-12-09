@@ -4,13 +4,12 @@ import de.digitra.uniplaner.domain.Lecturer;
 import de.digitra.uniplaner.exceptions.BadRequestException;
 import de.digitra.uniplaner.exceptions.DuplicateEmailException;
 import de.digitra.uniplaner.exceptions.ResourceNotFoundException;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 public interface ILecturerController {
     /**
@@ -66,7 +65,7 @@ public interface ILecturerController {
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */
     @GetMapping("/{id}")
-    ResponseEntity<Lecturer> getLecturer(@PathVariable Long id) throws ResourceNotFoundException;
+    ResponseEntity<Optional<Lecturer>> getLecturer(@PathVariable Long id) throws ResourceNotFoundException;
 
     /**
      * {@code DELETE  /lecturers/:id} : Mit dieser Methode eine Ressource mit der angegebenen Id gelöscht.

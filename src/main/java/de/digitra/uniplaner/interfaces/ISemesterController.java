@@ -3,13 +3,12 @@ package de.digitra.uniplaner.interfaces;
 import de.digitra.uniplaner.domain.Semester;
 import de.digitra.uniplaner.exceptions.BadRequestException;
 import de.digitra.uniplaner.exceptions.ResourceNotFoundException;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 public interface ISemesterController {
     /**
@@ -63,7 +62,7 @@ public interface ISemesterController {
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */
     @GetMapping("/{id}")
-    ResponseEntity<Semester> getSemester(@PathVariable Long id) throws ResourceNotFoundException;
+    ResponseEntity<Optional<Semester>> getSemester(@PathVariable Long id) throws ResourceNotFoundException;
 
     /**
      * {@code DELETE  /semesters/:id} : Mit dieser Methode eine Ressource mit der angegebenen Id gelöscht.

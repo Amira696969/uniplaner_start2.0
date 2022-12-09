@@ -7,6 +7,7 @@ import de.digitra.uniplaner.interfaces.ILectureDateController;
 import de.digitra.uniplaner.service.LectureDateService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class LectureDateController implements ILectureDateController {
 
     @GetMapping
     public ResponseEntity<LectureDate> createLectureDate(@RequestBody LectureDate lecturedate) throws BadRequestException{
-        return ResponseEntity.created(URI.create("/startDate/"+lecturedate.getStartDate())).build();
+        return ResponseEntity.created(URI.create("/lecturedates/"+lecturedate.getStartDate())).build();
     }
 
     @GetMapping
@@ -55,6 +56,6 @@ public class LectureDateController implements ILectureDateController {
     @GetMapping
     public ResponseEntity<Void> deleteLectureDate(@PathVariable Long id){
         logger.debug("Request to delete Lecture {}", id);
-        return null;
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

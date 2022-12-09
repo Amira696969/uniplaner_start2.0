@@ -3,13 +3,12 @@ package de.digitra.uniplaner.interfaces;
 import de.digitra.uniplaner.domain.StudyClass;
 import de.digitra.uniplaner.exceptions.BadRequestException;
 import de.digitra.uniplaner.exceptions.ResourceNotFoundException;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 public interface IStudyClassController {
     /**
@@ -63,7 +62,7 @@ public interface IStudyClassController {
      * @throws ResourceNotFoundException wird ausgelöst, falls die Ressource mit der angegebenen Id nicht gefunden werden konnte.
      */
     @GetMapping("/{id}")
-    ResponseEntity<StudyClass> getStudyClass(@PathVariable Long id) throws ResourceNotFoundException;
+    ResponseEntity<Optional<StudyClass>> getStudyClass(@PathVariable Long id) throws ResourceNotFoundException;
 
     /**
      * {@code DELETE  /studyclasses/:id} : Mit dieser Methode eine Ressource mit der angegebenen Id gelöscht.

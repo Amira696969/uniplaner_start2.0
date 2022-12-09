@@ -8,6 +8,7 @@ import de.digitra.uniplaner.interfaces.ILectureService;
 import de.digitra.uniplaner.service.LectureService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,8 +20,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/lectures")
 public class LectureController implements ILectureController {
-
-    ILectureService IlectureService;
     LectureService lectureService;
     Logger logger = LoggerFactory.getLogger(LectureService.class);
 
@@ -57,6 +56,6 @@ public class LectureController implements ILectureController {
     @GetMapping
     public ResponseEntity<Void> deleteLecture(@PathVariable Long id){
         logger.debug("Request to delete Lecture {}", id);
-        return null;
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }
